@@ -1,0 +1,94 @@
+\documentclass[aspectratio=169]{beamer}
+
+% \usepackage{lua-visual-debug}
+\usetheme{brutalb}
+
+\title{The \texttt{BrutalB} beamer theme}
+\date[ISPN ’80]{27th International Symposium of Prime Numbers}
+\author[Euclid]{Euclid of Alexandria \texttt{euclid@alexandria.edu}}
+
+\usepackage{lipsum}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Section Page}
+
+\begin{frame} 
+\frametitle{Fuzzy Modeling} 
+\framesubtitle{The proof uses \textit{reductio ad absurdum}.} 
+\begin{theorem}
+There is no largest prime number. \end{theorem} 
+\begin{enumerate} 
+\item<1-| alert@1> Suppose $p$ were the largest prime number. 
+\item<2-> Let $q$ be the product of the first $p$ numbers. 
+\item<3-> Then $q+1$ is not divisible by any of them. 
+\item<1-> But $q + 1$ is greater than $1$, thus divisible by some prime
+number not in the first $p$ numbers.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{A Tikz figure}
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}
+      \pgfdeclarelayer{background layer}
+      \pgfdeclarelayer{foreground layer}
+      \pgfsetlayers{background layer,main,foreground layer}
+
+      \begin{pgfonlayer}{foreground layer}
+        \node[draw, align=center, fill=col1] (n1) at (-5,0) {Fuzzy Set};
+        \node[draw, align=center, fill=col1] (n2) at (-2,3) {Ontology};
+        \node[draw, align=center, fill=col1] (n3) at (-3,-2.5) {Prime Number};
+        \node[draw, align=center, fill=col1] (n4) at (0, 1) {Beamer};
+        \node[draw, align=center, fill=col1] (n5) at (2,-2) {\LaTeX};
+        \node[draw, align=center, fill=col1] (n6) at (4,2) {Python};
+        \draw[-, line width=1] (n1) -- (n3);
+        \draw[-, line width=1] (n1) -- (n2);
+        \draw[-, line width=1] (n2) -- (n3);
+        \draw[-, line width=1] (n4) -- (n5);
+        \draw[-, line width=1] (n4) -- (n6);
+        \draw[-, line width=1] (n2) -- (n6);
+        \draw[-, line width=1] (n5) -- (n6);
+      \end{pgfonlayer}
+      
+      \begin{pgfonlayer}{background layer}
+        \foreach \n in {1,...,6}{
+          \filldraw[black] ($(n\n.north west) + (.2em, -.2em)$) rectangle ($(n\n.south east) + (.2em, -.2em)$);
+        };
+      \end{pgfonlayer}
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[c]{Fonts}
+  \begin{columns}
+    \begin{column}{.7\textwidth}
+      \begin{description}
+      \item[italics] \textit{The fast bulldog jumps the great happy wizard}
+      \item[bold] \textbf{The fast bulldog jumps the great happy wizard}
+      \item[smallcaps] \textsc{The fast bulldog jumps the great happy wizard}
+      \item[roman] {\rmfamily The fast bulldog jumps the great happy wizard}
+      \item[source] \texttt{The fast bulldog jumps the great happy wizard}
+      \end{description}
+    \end{column}
+    \vrule
+    \begin{column}{.3\textwidth}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Typesetting Mathematics}
+  \begin{block}{Gaussian Probability Density Function}
+    \[
+      f \left(x \mid \mu, \sigma^2 \right) = \dfrac{1}{\sqrt{2 \sigma^2 \pi}} e^{- \dfrac{(x-\mu)^2}{2\sigma^2}}
+    \]
+  \end{block}
+
+\end{frame}
+
+\end{document}

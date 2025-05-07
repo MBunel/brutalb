@@ -1,0 +1,127 @@
+\mode<presentation>
+
+\setbeamersize{text margin left=2.5em}
+\setbeamersize{text margin right=2.5em}
+% \setbeamersize{sidebar width left=.25\paperwidth}
+% \setlength\leftmargini{0pt}
+% \setlength\leftmarginii{1.5ex}
+% \setlength\leftmarginiii{1.5ex}
+
+\def\mrg{.35} % Margin border 
+\def\xshdw{.1} % Shadow x shift
+\def\yshdw{-.1} % Shadow y shift
+
+\setbeamertemplate{background}{
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \coordinate (A) at (\mrg cm, \mrg cm);
+    \coordinate (B) at (\mrg cm, \the\paperheight - \mrg cm);
+    \coordinate (C) at (\the\paperwidth - \mrg cm, \the\paperheight - \mrg cm);
+    \coordinate (D) at (\the\paperwidth - \mrg cm, \mrg cm);
+    % Background color
+    \ifnum\thepage=1\relax%
+      \filldraw[col1] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+    \fi
+    \ifnum\thepage>1\relax%
+      \filldraw[col2] (0,0) rectangle (\the\paperwidth,\the\paperheight);
+    \fi
+    % foreground color
+    \filldraw[fill=black] ($(A) + (\xshdw cm, \yshdw cm)$) rectangle  ($(C) + (\xshdw cm, \yshdw cm)$);
+    % Shadow
+    \usebeamercolor{foreground}
+    \filldraw[fill=bg, line width=0.25mm, draw=black] (A) rectangle (C);
+  \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{texsx}[1][]
+{
+  \vfill%
+  \usebeamerfont{title in titlepage}\inserttitle\par%
+  \vskip0.75cm%
+  \usebeamerfont{author in titlepage}\insertauthor%
+  \vskip0.2cm%
+  \usebeamerfont{institute in titlepage}\insertshortinstitute%
+  \vskip0.2cm%
+  \usebeamerfont{date in titlepage}\insertdate%
+  \vfill
+}
+
+% Section page
+\defbeamertemplate{section page}{}
+{
+  \begin{center}
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \insertsectionhead\par
+    \ifx\insertsubsectionhead\@empty\else
+     \usebeamercolor[fg]{subsection title}
+     \usebeamerfont{subsection title}
+      \insertsubsectionhead
+    \fi
+  \end{center}
+}
+
+\newcommand{\brutalb@disablesectionpage}{
+  \AtBeginSection{
+    % intentionally empty
+  }
+}
+
+
+\AtBeginSection{
+  \ifbeamer@inframe
+    \sectionpage
+  \else
+    \frame[plain,c,noframenumbering]{\sectionpage}
+  \fi
+}
+
+
+
+
+% Standout variant
+\providebool{brutalb@standout}
+\define@key{beamerframe}{standout}[true]{%
+  \booltrue{brutalb@standout}
+  \begingroup
+  \setkeys{beamerframe}{c}
+  \setkeys{beamerframe}{noframenumbering}
+  \ifbeamercolorempty[bg]{palette primary}{
+      \setbeamercolor{background canvas}{
+        use=palette primary,
+        bg=-palette primary.fg
+      }
+    }{
+      \setbeamercolor{background canvas}{
+        use=palette primary,
+        bg=palette primary.bg
+      }
+    }
+    \setbeamercolor{local structure}{
+      fg=palette primary.fg
+    }
+    \usebeamercolor[fg]{palette primary}
+  }
+
+
+
+  \pretocmd{\beamer@reseteecodes}{%
+    \ifbool{brutalb@standout}{
+        \endgroup
+        \boolfalse{brutalb@standout}
+      }{}
+    }{}{}
+
+    \AtBeginEnvironment{beamer@frameslide}{
+      \ifbool{brutalb@standout}{
+          \centering
+          \usebeamerfont{standout}
+        }{}
+      }
+
+      
+      
+
+\mode
+<all>

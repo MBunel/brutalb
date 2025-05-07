@@ -1,0 +1,135 @@
+\mode<presentation>
+
+
+% Custom item style
+% \defbeamertemplate{itemize item}{bsquare}{
+%   \hbox{%
+%     \vrule width1ex height1ex depth.4ex%
+%     \hskip.5ex%
+%     \hbox to1ex{%
+%       \hfil%
+%       \color{col2}\vrule width1ex height1ex depth.4ex%
+%       \hfil}%
+%   }}
+
+\defbeamertemplate{itemize item}{bsquare}{%
+  \resizebox{1.2ex}{!}{%
+    \tikz{%
+      \draw[fill=black] (0.2ex,-0.2ex) rectangle (1.2ex,0.8ex);%
+      \draw[fill=col4, line width=0.1ex] (0,0) rectangle (1ex,1ex);%
+    }%
+  }%
+}
+\defbeamertemplate{itemize subitem}{bsquare}{%
+  \resizebox{1.2ex}{!}{%
+    \tikz{%
+      \draw[fill=black] (0.2ex,-0.2ex) rectangle (1.2ex,0.8ex);%
+      \draw[fill=col4, line width=0.1ex] (0,0) rectangle (1ex,1ex);%
+    }%
+  }%
+}
+\defbeamertemplate{itemize subsubitem}{bsquare}{%
+  \resizebox{1.2ex}{!}{%
+    \tikz{%
+      \draw[fill=black] (0.2ex,-0.2ex) rectangle (1.2ex,0.8ex);%
+      \draw[fill=col4, line width=0.1ex] (0,0) rectangle (1ex,1ex);%
+    }%
+  }%
+}
+
+\setbeamertemplate{itemize items}[bsquare]
+
+%\defbeamertemplate{frame numbering}{none}{\insertframenumber}
+
+\defbeamertemplate{footer}{plain}{%
+    \insertframenumber
+  }
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]%
+
+
+
+ % Frame title
+ \defbeamertemplate*{frametitle}{texsx}[1][]
+ {
+   \vskip0.5cm%
+   \parbox{\the\textwidth}{\insertframetitle}\par   
+   \usebeamerfont{framesubtitle}%
+   \parbox{\the\textwidth}{\insertframesubtitle}
+ }
+
+% \setbeamertemplate{blocks}{default}
+
+% \setbeamertemplate{block begin}
+% {
+% \par\vskip\medskipamount%
+% \begin{beamercolorbox}[colsep*=2mm]{block title}
+%   \usebeamerfont*{block title}\insertblocktitle%
+% \end{beamercolorbox}%
+% {\parskip0pt\par}%
+% \ifbeamercolorempty[bg]{block title}
+% {}
+% {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+% \usebeamerfont{block body}%
+% \begin{beamercolorbox}[colsep*=2mm,vmode]{block body}%
+% \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+% }
+% % > > > Example Block
+% \setbeamertemplate{block example begin}
+% {
+% \par\vskip\medskipamount%
+% \begin{beamercolorbox}[colsep*=2mm]{block title example}G
+%   \usebeamerfont*{block title example}\insertblocktitle%
+% \end{beamercolorbox}%
+% {\parskip0pt\par}%
+% \ifbeamercolorempty[bg]{block title example}
+% {}
+% {\ifbeamercolorempty[bg]{block body example}{}{\nointerlineskip\vskip-0.5pt}}%
+% \usebeamerfont{block body example}%% \begin{beamercolorbox}[colsep*=2mm,vmode]{block body example}%
+% \ifbeamercolorempty[bg]{block body example}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+% }
+% % > > > Alert Block
+% \setbeamertemplate{block alerted begin}
+% {
+% \par\vskip\medskipamount%
+% \begin{beamercolorbox}[colsep*=2mm]{block title alerted}
+%   \usebeamerfont*{block title alerted}\insertblocktitle%
+% \end{beamercolorbox}%
+% {\parskip0pt\par}%
+% \ifbeamercolorempty[bg]{block title alerted}
+% {}
+% {\ifbeamercolorempty[bg]{block body alerted}{}{\nointerlineskip\vskip-0.5pt}}%
+% \usebeamerfont{block body alerted}%
+% \begin{beamercolorbox}[colsep*=2mm,vmode]{block body alerted}%
+% \ifbeamercolorempty[bg]{block body alerted}{\vskip-25ex}{\vskip-.75ex}\vbox{}%
+% }
+
+
+
+\setbeamertemplate{footline}{%
+  \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth, 2cm);
+    \coordinate (A) at (\mrg cm, \mrg cm);
+    \coordinate (B) at (\mrg cm, \the\paperheight - \mrg cm);
+    \coordinate (C) at (\the\paperwidth - \mrg cm, \the\paperheight - \mrg cm);
+    \coordinate (D) at (\the\paperwidth - \mrg cm, \mrg cm);
+    \node[fill=col4,draw=black,thick,minimum width=.5cm,minimum height=.5cm] at ($(D) + (-.25cm, .25cm)$) {\usebeamerfont{page number in footline}\insertframenumber};  
+  \end{tikzpicture} 
+  % \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{author in head/foot}%
+  %   \leavevmode{\usebeamerfont{author in head/foot}\insertshortauthor}%
+  %   {\usebeamerfont{institute in head/foot}\usebeamercolor[fg]{institute in head/foot}\insertshortinstitute}%
+  % \end{beamercolorbox}%
+  % \begin{beamercolorbox}[ht=2.5ex,dp=1.125ex,%
+  %   leftskip=.3cm,rightskip=.3cm plus1fil]{title in head/foot}%
+  %   {\usebeamerfont{title in head/foot}\insertshorttitle}%
+  % \end{beamercolorbox}%
+  % \begin{beamercolorbox}[wd=.5cm,ht=.5cm,center]{page number in foot}
+  %   {\usebeamerfont{page number}}
+  % \end{beamercolorbox}
+}
+
+% Hyperref style
+\hypersetup{colorlinks,linkcolor=,urlcolor=col4, citecolor=col1}
+
+\mode<all>
+
