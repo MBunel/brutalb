@@ -1,4 +1,4 @@
-# Brutab : A Neubrutalist Beamer Theme
+# Brutalb : A Neubrutalist Beamer Theme
 
 **This is a early work in progress**
 
